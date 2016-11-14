@@ -1,7 +1,8 @@
 const path = require('path');
 const PouchDB = require('pouchdb-http');
 PouchDB.plugin(require('pouchdb-mapreduce'));
-const db = new PouchDB('http://localhost:5984/api-test')
+const db = new PouchDB('http://localhost:5984/api-test');
+
 
 var dal = {
     listClass: listClass,

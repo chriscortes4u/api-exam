@@ -80,23 +80,23 @@ app.delete('/person/:id', function(req, res, next) {
         }
     })
 })
-app.get('/person/', function(req, res, next){
-  const sortByParam = req.query.sortBy || 'person';
-  const sortBy = getPersonSortBy(sortByParam, 'nosql')
-  const sortToken = req.query.sortToken || "";
-  const limit = req.query.limit || 3;
+app.get('/person/', function(req, res, next) {
+    const sortByParam = req.query.sortBy || 'person';
+    const sortBy = getPersonSortBy(sortByParam, 'nosql')
+    const sortToken = req.query.sortToken || "";
+    const limit = req.query.limit || 3;
 
-  dal.listPerson(sortBy, sortToken, limit, function callback(err, data) {
-    if(err){
-      var responseError = BuildResponseError(err);
-      return next(new HTTPError(responseError.status, responseError.message, responseError));
-    }
-    if (data) {
-        console.log('GET' + req.path, "query:", req.query, data)
-        res.append('Content-type', 'application/json');
-        res.status(201).send(data);
-    }
-  })
+    dal.listPerson(sortBy, sortToken, limit, function callback(err, data) {
+        if (err) {
+            var responseError = BuildResponseError(err);
+            return next(new HTTPError(responseError.status, responseError.message, responseError));
+        }
+        if (data) {
+            console.log('GET' + req.path, "query:", req.query, data)
+            res.append('Content-type', 'application/json');
+            res.status(201).send(data);
+        }
+    })
 })
 /////////////
 /////Class///
@@ -172,23 +172,23 @@ app.delete('/class/:id', function(req, res, next) {
         }
     })
 })
-app.get('/class', function(req, res, next){
-  const sortByParam = req.query.sortBy || 'class';
-  const sortBy = getClassSortBy(sortByParam, 'nosql')
-  const sortToken = req.query.sortToken || "";
-  const limit = req.query.limit || 3;
+app.get('/class', function(req, res, next) {
+    const sortByParam = req.query.sortBy || 'class';
+    const sortBy = getClassSortBy(sortByParam, 'nosql')
+    const sortToken = req.query.sortToken || "";
+    const limit = req.query.limit || 3;
 
-  dal.listClass(sortBy, sortToken, limit, function callback(err, data) {
-    if(err){
-      var responseError = BuildResponseError(err);
-      return next(new HTTPError(responseError.status, responseError.message, responseError));
-    }
-    if (data) {
-        console.log('GET' + req.path, "query:", req.query, data)
-        res.append('Content-type', 'application/json');
-        res.status(201).send(data);
-    }
-  })
+    dal.listClass(sortBy, sortToken, limit, function callback(err, data) {
+        if (err) {
+            var responseError = BuildResponseError(err);
+            return next(new HTTPError(responseError.status, responseError.message, responseError));
+        }
+        if (data) {
+            console.log('GET' + req.path, "query:", req.query, data)
+            res.append('Content-type', 'application/json');
+            res.status(201).send(data);
+        }
+    })
 })
 ////////////
 ////Maker///
@@ -263,35 +263,24 @@ app.delete('/maker/:id', function(req, res, next) {
         }
     })
 })
-app.get('/maker', function(req, res, next){
-  const sortByParam = req.query.sortBy || 'person';
-  const sortBy = getMakerSortBy(sortByParam, 'nosql')
-  const sortToken = req.query.sortToken || "";
-  const limit = req.query.limit || 3;
+app.get('/maker', function(req, res, next) {
+    const sortByParam = req.query.sortBy || 'person';
+    const sortBy = getMakerSortBy(sortByParam, 'nosql')
+    const sortToken = req.query.sortToken || "";
+    const limit = req.query.limit || 3;
 
-  dal.listMaker(sortBy, sortToken, limit, function callback(err, data) {
-    if(err){
-      var responseError = BuildResponseError(err);
-      return next(new HTTPError(responseError.status, responseError.message, responseError));
-    }
-    if (data) {
-        console.log('GET' + req.path, "query:", req.query, data)
-        res.append('Content-type', 'application/json');
-        res.status(201).send(data);
-    }
-  })
+    dal.listMaker(sortBy, sortToken, limit, function callback(err, data) {
+        if (err) {
+            var responseError = BuildResponseError(err);
+            return next(new HTTPError(responseError.status, responseError.message, responseError));
+        }
+        if (data) {
+            console.log('GET' + req.path, "query:", req.query, data)
+            res.append('Content-type', 'application/json');
+            res.status(201).send(data);
+        }
+    })
 })
-
-
-
-
-
-
-
-
-
-
-
 
 //////
 ///////////////Sort function/////////
@@ -301,18 +290,24 @@ function getPersonSortBy(type, dalModule) {
     var sortBy;
     var options = {
         'person': function() {
-            sortBy = dalModule === 'nosql' ? 'personView' : 'vperson';
+            sortBy = dalModule === 'nosql'
+                ? 'personView'
+                : 'vperson';
         },
         'class': function() {
             //email
-            sortBy = dalModule === 'nosql' ? 'classView' : 'vclass';
+            sortBy = dalModule === 'nosql'
+                ? 'classView'
+                : 'vclass';
         },
-      'lastName': function() {
-          sortBy = dalModule === 'nosql' ? 'lastNameView' : 'vlstnName';
-      }
+        'lastName': function() {
+            sortBy = dalModule === 'nosql'
+                ? 'lastNameView'
+                : 'vlstnName';
+        }
         //'default': function() {
-      //      sortBy = dalModule === 'nosql' ? 'teamView' : 'vTeam';
-    //    }
+        //      sortBy = dalModule === 'nosql' ? 'teamView' : 'vTeam';
+        //    }
     };
     // invoke it
     (options[type] || options['default'])();
@@ -324,18 +319,24 @@ function getClassSortBy(type, dalModule) {
     var sortBy;
     var options = {
         'person': function() {
-            sortBy = dalModule === 'nosql' ? 'personView' : 'vperson';
+            sortBy = dalModule === 'nosql'
+                ? 'personView'
+                : 'vperson';
         },
         'class': function() {
             //email
-            sortBy = dalModule === 'nosql' ? 'classView' : 'vclass';
+            sortBy = dalModule === 'nosql'
+                ? 'classView'
+                : 'vclass';
         },
-      'lastName': function() {
-          sortBy = dalModule === 'nosql' ? 'lastNameView' : 'vlstnName';
-      }
+        'lastName': function() {
+            sortBy = dalModule === 'nosql'
+                ? 'lastNameView'
+                : 'vlstnName';
+        }
         //'default': function() {
-      //      sortBy = dalModule === 'nosql' ? 'teamView' : 'vTeam';
-    //    }
+        //      sortBy = dalModule === 'nosql' ? 'teamView' : 'vTeam';
+        //    }
     };
     // invoke it
     (options[type] || options['default'])();
@@ -346,18 +347,24 @@ function getMakerSortBy(type, dalModule) {
     var sortBy;
     var options = {
         'person': function() {
-            sortBy = dalModule === 'nosql' ? 'person' : 'vperson';
+            sortBy = dalModule === 'nosql'
+                ? 'person'
+                : 'vperson';
         },
         'class': function() {
             //email
-            sortBy = dalModule === 'nosql' ? 'class' : 'vclass';
+            sortBy = dalModule === 'nosql'
+                ? 'class'
+                : 'vclass';
         },
-      'maker': function() {
-          sortBy = dalModule === 'nosql' ? 'maker' : 'vmaker';
-      }
+        'maker': function() {
+            sortBy = dalModule === 'nosql'
+                ? 'maker'
+                : 'vmaker';
+        }
         //'default': function() {
-      //      sortBy = dalModule === 'nosql' ? 'teamView' : 'vTeam';
-    //    }
+        //      sortBy = dalModule === 'nosql' ? 'teamView' : 'vTeam';
+        //    }
     };
     // invoke it
     (options[type] || options['default'])();
@@ -365,17 +372,13 @@ function getMakerSortBy(type, dalModule) {
     return sortBy;
 }
 
-
-
-
-
 //////
 ///////Error function//////
 /////
 
 function BuildResponseError(err) {
 
-  const statuscheck = isNaN(err.message.substring(0, 3)) === true
+    const statuscheck = isNaN(err.message.substring(0, 3)) === true
         ? "400"
         : err.message.substring(0, 3)
     const status = err.status
@@ -406,7 +409,6 @@ function BuildResponseError(err) {
     return errormsg
 }
 
-
 app.use(function(err, req, res, next) {
     console.log('error handler')
     console.log(req.method, ' ', req.path, " err: ", err)
@@ -415,4 +417,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(4000, function() {
-    console.log('Example app listening on port 4000!');
+    console.log('Example app listening on port 4000!')
+  });
